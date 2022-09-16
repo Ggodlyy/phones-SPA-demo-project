@@ -50,8 +50,6 @@ export default function PhoneDetailsPage() {
 
     if (confirmation) {
       phoneService.buy(phoneId).then((res) => {
-        console.log(res);
-
         if (res?.message) {
           window.alert(res.message);
         }
@@ -99,6 +97,28 @@ export default function PhoneDetailsPage() {
     </div>
   );
 
+  const addComment = (
+    <div className="add-comment">
+    <textarea
+      className="comment-section"
+      name="comment"
+      placeholder="comment..."
+      id=""
+      cols="30"
+      rows="10"
+    ></textarea>
+    <Button
+      onClick={commentHandler}
+      variant="contained"
+      endIcon={<SendIcon />}
+    >
+      Comment
+    </Button>
+  </div>
+  );
+
+  console.log(user)
+
   return (
     <section className="phone-details">
       <article className="phone-details-info">
@@ -126,23 +146,7 @@ export default function PhoneDetailsPage() {
             ? currentPhone.comments?.map((commentObj) => <Comment key={commentObj.commentId} {...commentObj} />)
             : "No comments"}
         </div>
-        <div className="add-comment">
-          <textarea
-            className="comment-section"
-            name="comment"
-            placeholder="comment..."
-            id=""
-            cols="30"
-            rows="10"
-          ></textarea>
-          <Button
-            onClick={commentHandler}
-            variant="contained"
-            endIcon={<SendIcon />}
-          >
-            Comment
-          </Button>
-        </div>
+       {user.email ? addComment : null}
       </article>
     </section>
   );
