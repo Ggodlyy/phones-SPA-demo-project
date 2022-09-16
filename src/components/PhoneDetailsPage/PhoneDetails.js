@@ -6,6 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import Comment from "../CommentCard/Comment";
+import { Delete } from "@mui/icons-material";
 
 export default function PhoneDetailsPage() {
   const navigate = useNavigate();
@@ -88,9 +89,9 @@ export default function PhoneDetailsPage() {
       <NavLink to={`/catalog/edit/${currentPhone._id}`} className="edit-btn">
         Edit
       </NavLink>
-      <NavLink onClick={deleteHandler} to={"#"} className="del-btn">
+      <Button onClick={deleteHandler} variant="contained" startIcon={<Delete />} >
         Delete
-      </NavLink>
+      </Button>
     </div>
   );
 
@@ -101,7 +102,6 @@ export default function PhoneDetailsPage() {
       </NavLink>
     </div>
   );
-
 
   return (
     <section className="phone-details">
