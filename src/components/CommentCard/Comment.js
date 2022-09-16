@@ -4,11 +4,26 @@ import { orange } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { IconButton } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 
 const Comment = ({ commentText, createdAt, owner }) => {
   const { user } = useContext(AuthContext);
   const commentOwner = Boolean(user._id === owner._id);
-  console.log(commentOwner)
+
+
+  const removeCommentHandler = (e) => {
+    e.preventDefault();
+    
+  }
+
+  const removeBtn = (
+    <div className="remove-comment">
+      <IconButton onClick={removeCommentHandler} color="primary">
+        <Delete></Delete>
+      </IconButton>
+    </div>
+  );
 
   return (
     <article className="comment">
@@ -27,9 +42,7 @@ const Comment = ({ commentText, createdAt, owner }) => {
         <p>{commentText}</p>
       </div>
 
-      <div className="remove-comment">
-        
-      </div>
+      {commentOwner && removeBtn}
     </article>
   );
 };
