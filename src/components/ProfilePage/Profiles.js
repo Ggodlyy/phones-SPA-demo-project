@@ -14,7 +14,7 @@ const ProfilePage = () => {
   const userParam = useParams();
   const owner = Boolean(userParam.username === user.username);
 
-  useEffect(() => {
+  useEffect(() => { 
     phoneService.getAll().then((res) => {
       authService.getUser(userParam.username).then((userRes) => {
         const phones = res.filter((phone) => phone.owner === userRes._id);
