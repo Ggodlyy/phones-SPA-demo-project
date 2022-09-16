@@ -1,6 +1,10 @@
-.comment-dipslay-info {
-    padding-left: 15px;
-    margin-bottom: 5%;
+.comment {
+    display: flex;
+}
+
+.comment-display {
+    margin-right: 2%;
+    align-self: center;
 }
 
 .comment-date {
@@ -12,3 +16,4 @@
 .avatar-link {
     text-decoration: none;
 }
+
