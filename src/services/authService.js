@@ -22,6 +22,10 @@ export const logout = async (accessToken) => {
 export const register = (username, email, password, avatar) =>
   request.post(`${baseUrl}/register`, { username, email, password, avatar });
 
-export const getUser = (userId) => {
+export const getProfile = (userId) => {
   return request.post(`${baseUrl}/profile`, { userId });
+};
+
+export const getUser = (username) => {
+  return request.get(`${baseUrl}/profile/${username}`);
 };

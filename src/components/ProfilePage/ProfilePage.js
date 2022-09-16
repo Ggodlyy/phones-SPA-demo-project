@@ -6,23 +6,34 @@ import * as authService from "../../services/authService";
 import PhoneCard from "../PhoneCard/PhoneCard";
 import "./ProfilePage.scss";
 import { isAuth } from "../../hoc/isAuth";
+import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
   const [myPhones, setMyPhones] = useState();
   const [boughtPhones, setBoughtPhones] = useState();
+  const userParam = useParams();
 
   useEffect(() => {
     phoneService.getAll().then((res) => {
-      authService.getUser(user._id).then((userRes) => {
+      let userInfo = null;
 
-        const phones = res.filter((phone) => phone.owner === user._id);
+      if (userParam.username) {
+        userInfo = authService.getUser(userParam.username);
+      } else {
+        userInfo = authService.getProfile(user._id);
+      }
 
+      userInfo.then((userRes) => {
+        const phones = res.filter((phone) => phone.owner === userRes._id);
+
+
+        console.log(userParam.username)
         setMyPhones(phones);
         setBoughtPhones(userRes.boughtPhones);
       });
     });
-  }, [user._id]);
+  }, [user._id, userParam.username]);
 
   const phonesDisplay = (
     <div className="phones">
@@ -33,8 +44,6 @@ const ProfilePage = () => {
       </section>
     </div>
   );
-
-  console.log(boughtPhones);
 
   const boughtPhoneDisplay = (
     <div className="phones">
@@ -48,13 +57,23 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
-      <h1>Hello {user.username}</h1>
-      <h1 className="profile-titles ">My phones</h1>
+      <h1>
+        {userParam.username
+          ? `${userParam.username}'s Profile`
+          : `Hello ${user.username}`}
+      </h1>
+      <h1 className="profile-titles ">
+        {userParam.username ? `${userParam.username}'s phones` : "My Phones"}
+      </h1>
       <section className="my-phones">
         {myPhones?.length > 0 ? phonesDisplay : <h4>No phones</h4>}
       </section>
 
-      <h1 className="profile-titles">Bought phones</h1>
+      <h1 className="profile-titles">
+        {userParam.username
+          ? `${userParam.username}'s bought phones`
+          : "Bought Phones"}
+      </h1>
       <section className="bought-phones">
         {boughtPhones?.length > 0 ? (
           boughtPhoneDisplay

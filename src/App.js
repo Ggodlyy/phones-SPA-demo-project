@@ -14,6 +14,7 @@ import EditPage from "./components/EditPage/EditPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 
+
 function App() {
   return (
     <AuthProvider>
@@ -33,7 +34,8 @@ function App() {
                 element={<PhoneDetailsPage />}
               />
               <Route path="/catalog/edit/:phoneId" element={<EditPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route path='/profile' element={<ProfilePage />} />
+              <Route path="/profiles/:username" element={<ProfilePage />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </main>
