@@ -17,4 +17,4 @@ export const buy = (id) => request.get(`${baseUrl}/buy/${id}`);
 
 export const comment = (id, comment) => request.post(`${baseUrl}/comment/${id}`, comment);
 
-// export const removeComment = ()
+export const destroyComment = (commentInfo) => request.post(`${baseUrl}/destroy`, commentInfo)

@@ -76,15 +76,18 @@ async function comment(id, userId, userComment) {
   return commentInfo;
 }
 
-async function removeComment(id, commentToRemoveId) {
-  const phone = await Phone.findById(id);
+async function destroyComment(phoneId, commentToRemoveId) {
+  const phone = await Phone.findById(phoneId);
 
   const i = phone.comments.findIndex(c => c.commentId === commentToRemoveId);
+
+  console.log(`index ${i}`);
+  
   phone.comments.splice(i, 1);
 
   await phone.save();
 
-  return phone;
+  return phone.comments;
 }
 
 module.exports = {
@@ -95,5 +98,5 @@ module.exports = {
   deleteById,
   buy,
   comment,
-  removeComment
+  destroyComment
 };
