@@ -13,23 +13,13 @@ const ProfilePage = () => {
   const [boughtPhones, setBoughtPhones] = useState();
 
   useEffect(() => {
-    const bought = [];
-
     phoneService.getAll().then((res) => {
       authService.getUser(user._id).then((userRes) => {
-        console.log(userRes);
-        userRes.myPhones.forEach((myPhoneId) => {
-          const boughtPhone = res.find((phone) => phone._id === myPhoneId);
-
-          if (boughtPhone) {
-            bought.push(boughtPhone);
-          }
-        });
 
         const phones = res.filter((phone) => phone.owner === user._id);
 
         setMyPhones(phones);
-        setBoughtPhones(bought);
+        setBoughtPhones(userRes.boughtPhones);
       });
     });
   }, [user._id]);
@@ -43,6 +33,8 @@ const ProfilePage = () => {
       </section>
     </div>
   );
+
+  console.log(boughtPhones);
 
   const boughtPhoneDisplay = (
     <div className="phones">
