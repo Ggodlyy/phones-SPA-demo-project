@@ -1,0 +1,29 @@
+.phone-catalog {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5%;
+}
+
+.no-phones {
+  text-align: center;
+}
+
+
+.filter {
+  margin-left: 35%;
+  text-align: center;
+  max-width: 20%;
+  color: white;
+}
+
+.label {
+  color: black;
+}
+
+.select {
+  color: black;
+  background-color: white;
+}
+
+
+

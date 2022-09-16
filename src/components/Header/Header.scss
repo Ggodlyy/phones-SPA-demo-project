@@ -1,0 +1,89 @@
+header {
+  background-color: rgb(22, 27, 34);
+  position: sticky;
+  top: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  margin-left: 3%;
+}
+
+.nav-ul {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 5%;
+}
+
+.nav-ul li {
+  list-style: none;
+  margin-right: 30%;
+}
+
+.nav-ul li a {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  padding-bottom: 0.25rem;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: white;
+    transition: width 0.25s ease-out;
+  }
+}
+
+.nav-ul li a:hover::before {
+  width: 100%;
+}
+
+.right-nav {
+  margin-right: 9%;
+}
+
+.active {
+  color: whitesmoke;
+  font-size: 20px;
+}
+
+.logo {
+  position: relative;
+}
+
+.logo a {
+  &:hover {
+  }
+}
+
+.logo-img {
+  position: relative;
+  object-fit: contain;
+  height: 49px;
+  width: 55px;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+// .logo::before {
+//   content: "Home";
+//   position: absolute;
+//   left: 5px;
+//   bottom: 0;
+//   width: 0;
+//   color: white;
+//   opacity: 1;
+// }

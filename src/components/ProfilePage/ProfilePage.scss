@@ -1,0 +1,24 @@
+@mixin phonesDisplay {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.profile-page {
+  text-align: center;
+}
+
+.my-phones {
+  @include phonesDisplay();
+}
+
+.bought-phones {
+  @include phonesDisplay();
+}
+
+.profile-titles {
+  margin-top: 10%;
+}
+
+.phones {
+  width: 1920px;
+}

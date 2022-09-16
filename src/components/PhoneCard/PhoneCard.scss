@@ -1,0 +1,32 @@
+.phone-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10% 10% 0 0;
+}
+
+.phone-card-img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.phone-card-h3 {
+    margin: 0;
+}
+
+
+.details-btn {
+    text-decoration: none;
+    color: white;
+    border: 1px solid blue;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: rgb(144, 202, 249);
+    opacity: 0.8;
+
+    &:hover {
+        opacity: 1;
+    }
+}

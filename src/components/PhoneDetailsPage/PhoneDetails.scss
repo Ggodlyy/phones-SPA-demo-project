@@ -1,0 +1,79 @@
+.phone-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-details-info {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.phone-img {
+  object-fit: contain;
+  width: 350px;
+  height: 350px;
+}
+
+.phone-info {
+  margin-right: 3%;
+}
+
+.container {
+  width: 200px;
+  height: 65px;
+  overflow: visible;
+}
+
+.edit-delete-btns {
+  display: flex;
+  justify-content: space-around;
+}
+
+@mixin btn {
+  text-decoration: none;
+  color: white;
+  border: 1px solid blue;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: rgb(144, 202, 249);
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.edit-btn {
+  @include btn();
+}
+
+.del-btn {
+  @include btn();
+}
+
+.comments {
+  margin-bottom: 10%;
+}
+
+.add-comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-section {
+  width: 714px;
+  height: 67px;
+}
+
+.loading {
+  color: white;
+  background-color: white;
+}
+
+.all-comments {
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
