@@ -107,4 +107,16 @@ router.post("/destroy", isAuth(), async (req, res) => {
   }
 });
 
+router.post("/reply", isAuth(), async (req, res) => {
+  try {
+    const { phoneId, commentId, reply } = req.body;
+    const comments = await api.replyComment(phoneId, commentId, reply);
+    res.status(204).json(comments).end();
+  } catch (err) {
+    console.error(err.message);
+    const error = mapErrors(err);
+    res.status(400).json({ message: error });
+  }
+});
+
 module.exports = router;

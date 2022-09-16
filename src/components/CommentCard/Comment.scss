@@ -1,22 +1,36 @@
 .comment {
-    display: flex;
+  display: flex;
 }
 
 .comment-display {
-    margin-right: 2%;
-    align-self: center;
+  margin-right: 2%;
+  align-self: center;
 }
 
 .comment-date {
-    display: inline-block;
-    margin-left: 2%;
-    font-size: 14px;
+  display: inline-block;
+  margin-left: 2%;
+  font-size: 14px;
 }
 
 .avatar-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .remove-comment {
-    align-self: center;
+  align-self: center;
+}
+
+.replyDiv {
+  display: flex;
+}
+
+.reply-btn {
+  width: 100px;
+  height: 73px;
+}
+
+.reply-section {
+//   width: 467px;
+//   height: 68px;
 }

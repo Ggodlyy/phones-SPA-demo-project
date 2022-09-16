@@ -67,6 +67,7 @@ async function comment(id, userId, userComment) {
     owner: ownerInfo,
     createdAt: fullDate,
     commentText: userComment,
+    replies: []
   };
 
   phone.comments.push(commentInfo);
@@ -81,13 +82,24 @@ async function destroyComment(phoneId, commentToRemoveId) {
 
   const i = phone.comments.findIndex(c => c.commentId === commentToRemoveId);
 
-  console.log(`index ${i}`);
-  
   phone.comments.splice(i, 1);
 
   await phone.save();
 
   return phone.comments;
+}
+
+async function replyComment(phoneId, currentCommentId, reply) {
+  const phone = await Phone.findById(phoneId);
+
+  const comment = phone.comments.find(c => c.commentId === currentCommentId);
+
+
+  comment.replies.push(reply);
+
+  await phone.save();
+
+  return comment.replies;
 }
 
 module.exports = {
@@ -98,5 +110,6 @@ module.exports = {
   deleteById,
   buy,
   comment,
-  destroyComment
+  destroyComment,
+  replyComment
 };

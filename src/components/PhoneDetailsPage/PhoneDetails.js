@@ -16,6 +16,7 @@ export default function PhoneDetailsPage() {
   const { user } = useContext(AuthContext);
   const [commentState, setCommentState] = useState(false);
 
+
   useEffect(() => {
     phoneService.getOne(phoneId).then((res) => {
       setCommentState(false);
@@ -133,7 +134,7 @@ export default function PhoneDetailsPage() {
         <div className="all-comments">
           {currentPhone.comments?.length > 0
             ? currentPhone.comments?.map((commentObj) => (
-                <Comment key={commentObj.commentId} {...commentObj} phoneId={currentPhone._id} />
+                <Comment key={commentObj.commentId} {...commentObj} phoneId={currentPhone._id} setCommentState={setCommentState} />
               ))
             : "No comments"}
         </div>
