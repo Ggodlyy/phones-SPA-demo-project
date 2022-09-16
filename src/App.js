@@ -13,6 +13,7 @@ import PhoneDetailsPage from "./components/PhoneDetailsPage/PhoneDetails";
 import EditPage from "./components/EditPage/EditPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
+import Profiles from "./components/ProfilePage/Profiles";
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
               />
               <Route path="/catalog/edit/:phoneId" element={<EditPage />} />
               <Route path='/profile' element={<ProfilePage />} />
-              <Route path="/profiles/:username" element={<ProfilePage />} />
+              <Route path="/profiles/:username" element={<Profiles />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </main>

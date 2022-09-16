@@ -27,5 +27,5 @@ export const getProfile = (userId) => {
 };
 
 export const getUser = (username) => {
-  return request.get(`${baseUrl}/profile/${username}`);
+  return request.get(`${baseUrl}/profiles/${username}`);
 };
