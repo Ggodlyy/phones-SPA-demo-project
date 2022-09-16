@@ -76,13 +76,24 @@ async function comment(id, userId, userComment) {
   return commentInfo;
 }
 
+async function removeComment(id, commentToRemoveId) {
+  const phone = await Phone.findById(id);
+
+  const i = phone.comments.findIndex(c => c.commentId === commentToRemoveId);
+  phone.comments.splice(i, 1);
+
+  await phone.save();
+
+  return phone;
+}
+
 module.exports = {
   getAll,
   create,
   getById,
   update,
   deleteById,
-  // like,
   buy,
   comment,
+  removeComment
 };

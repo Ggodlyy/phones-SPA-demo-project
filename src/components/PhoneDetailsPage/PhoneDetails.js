@@ -70,6 +70,11 @@ export default function PhoneDetailsPage() {
     const textArea = e.target.previousElementSibling;
     const comment = textArea.value;
 
+    if (comment.length === 0) {
+      window.alert("You can't send a blank comment");
+      return null;
+    }
+
     phoneService.comment(currentPhone._id, { comment });
     textArea.value = "";
 
@@ -128,7 +133,7 @@ export default function PhoneDetailsPage() {
         <div className="all-comments">
           {currentPhone.comments?.length > 0
             ? currentPhone.comments?.map((commentObj) => (
-                <Comment key={commentObj.commentId} {...commentObj} />
+                <Comment key={commentObj.commentId} {...commentObj} phoneId={currentPhone._id} />
               ))
             : "No comments"}
         </div>

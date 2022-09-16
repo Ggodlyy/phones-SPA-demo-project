@@ -6,16 +6,17 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
+import * as phoneService from '../../services/phoneService';
 
-const Comment = ({ commentText, createdAt, owner }) => {
+const Comment = ({ commentText, createdAt, commentId, owner, phoneId }) => {
   const { user } = useContext(AuthContext);
   const commentOwner = Boolean(user._id === owner._id);
 
-
   const removeCommentHandler = (e) => {
     e.preventDefault();
+
     
-  }
+  };
 
   const removeBtn = (
     <div className="remove-comment">
