@@ -17,9 +17,8 @@ export default function PhoneDetailsPage() {
 
   useEffect(() => {
     phoneService.getOne(phoneId).then((res) => {
-      setCommentState(false)
+      setCommentState(false);
       setCurrentPhone(res);
-      console.log(res);
 
       if (res._ownerId === user._id) {
         setIsOwner(true);
@@ -61,6 +60,12 @@ export default function PhoneDetailsPage() {
 
   const commentHandler = (e) => {
     e.preventDefault();
+
+    if (!user.email) {
+      navigate("/login");
+      return null;
+    }
+
     const textArea = e.target.previousElementSibling;
     const comment = textArea.value;
 
@@ -97,27 +102,6 @@ export default function PhoneDetailsPage() {
     </div>
   );
 
-  const addComment = (
-    <div className="add-comment">
-    <textarea
-      className="comment-section"
-      name="comment"
-      placeholder="comment..."
-      id=""
-      cols="30"
-      rows="10"
-    ></textarea>
-    <Button
-      onClick={commentHandler}
-      variant="contained"
-      endIcon={<SendIcon />}
-    >
-      Comment
-    </Button>
-  </div>
-  );
-
-  console.log(user)
 
   return (
     <section className="phone-details">
@@ -143,10 +127,29 @@ export default function PhoneDetailsPage() {
       <article className="comments">
         <div className="all-comments">
           {currentPhone.comments?.length > 0
-            ? currentPhone.comments?.map((commentObj) => <Comment key={commentObj.commentId} {...commentObj} />)
+            ? currentPhone.comments?.map((commentObj) => (
+                <Comment key={commentObj.commentId} {...commentObj} />
+              ))
             : "No comments"}
         </div>
-       {user.email ? addComment : null}
+
+        <div className="add-comment">
+          <textarea
+            className="comment-section"
+            name="comment"
+            placeholder="comment..."
+            id=""
+            cols="30"
+            rows="10"
+          ></textarea>
+          <Button
+            onClick={commentHandler}
+            variant="contained"
+            endIcon={<SendIcon />}
+          >
+            Comment
+          </Button>
+        </div>
       </article>
     </section>
   );
