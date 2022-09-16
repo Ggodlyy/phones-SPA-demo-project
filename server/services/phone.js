@@ -1,92 +1,88 @@
-const Phone = require('../models/Phone');
-const User = require('../models/User');
-const uniqid = require('uniqid');
-
+const Phone = require("../models/Phone");
+const User = require("../models/User");
+const uniqid = require("uniqid");
 
 async function getAll() {
-    return Phone.find({});
+  return Phone.find({});
 }
 
 async function create(item) {
-    const result = new Phone(item);
-    await result.save();
+  const result = new Phone(item);
+  await result.save();
 
-    return result;
+  return result;
 }
 
 function getById(id) {
-    return Phone.findById(id);
+  return Phone.findById(id);
 }
 
 async function update(id, item) {
-    const existing = await Phone.findById(id);
+  const existing = await Phone.findById(id);
 
-    existing.brand = item.brand;
-    existing.model = item.model;
-    existing.img = item.img;
-    existing.description = item.description;
-    existing.price = item.price;
+  existing.brand = item.brand;
+  existing.model = item.model;
+  existing.img = item.img;
+  existing.description = item.description;
+  existing.price = item.price;
 
+  await existing.save();
 
-    await existing.save();
-
-    return existing;
+  return existing;
 }
 
 async function deleteById(id) {
-    await Phone.findByIdAndDelete(id);
+  await Phone.findByIdAndDelete(id);
 }
 
 async function buy(id, userId) {
-    const user = await User.findById(userId);
-    const phone = await Phone.findById(id);
-    console.log(`this is bought phone: ${phone}`)
+  const user = await User.findById(userId);
+  const phone = await Phone.findById(id);
+  console.log(`this is bought phone: ${phone}`);
 
-    if (user.boughtPhones.find(p => p._id === phone._id)) {
-        throw new Error('User has already purchased this phone');
-    }
+  if (user.boughtPhones.find((p) => p._id === phone._id)) {
+    throw new Error("User has already purchased this phone");
+  }
 
-    user.boughtPhones.push(phone);
+  user.boughtPhones.push(phone);
 
-    await user.save();
+  await user.save();
 }
 
 async function comment(id, userId, userComment) {
-    const phone = await Phone.findById(id);
-    const ownerInfo = await User.findOne({ _id: userId });
+  const phone = await Phone.findById(id);
+  const ownerInfo = await User.findOne({ _id: userId });
 
-    const date = new Date();
+  const date = new Date();
+  const [month, day, year] = [
+    date.getMonth(),
+    date.getDate(),
+    date.getFullYear(),
+  ];
 
-    const day = date.getDay();
-    const month = date.getMonth();
-    const year = date.getFullYear();
+  const fullDate = `${day}/${month}/${year}`;
 
-    const fullDate = `${day}/${month}/${year}`;
+  const commentInfo = {
+    commentId: uniqid(),
+    owner: ownerInfo,
+    createdAt: fullDate,
+    commentText: userComment,
+  };
 
-    console.log(ownerInfo);
+  phone.comments.push(commentInfo);
 
-    const commentInfo = {
-        commentId: uniqid(),
-        owner: ownerInfo,
-        createdAt: fullDate,
-        commentText: userComment
-    }
+  await phone.save();
 
-    phone.comments.push(commentInfo);
-
-    await phone.save();
-
-    return commentInfo
+  return commentInfo;
 }
 
-
 module.exports = {
-    getAll,
-    create,
-    getById,
-    update,
-    deleteById,
-    // like,
-    buy,
-    comment
+  getAll,
+  create,
+  getById,
+  update,
+  deleteById,
+  // like,
+  buy,
+  comment,
 };
