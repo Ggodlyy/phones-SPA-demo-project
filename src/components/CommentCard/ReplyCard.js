@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Delete } from "@mui/icons-material";
 import * as phoneService from "../../services/phoneService";
+import './ReplyCard.scss';
 
 const ReplyCard = ({
   replyId,
@@ -51,9 +52,9 @@ const ReplyCard = ({
         </div>
 
         <div className="comment-dipslay-info">
-          <h3>
+          <h4>
             {owner.username} <span className="comment-date">{createdAt}</span>
-          </h3>
+          </h4>
           <p>{replyText}</p>
         </div>
 

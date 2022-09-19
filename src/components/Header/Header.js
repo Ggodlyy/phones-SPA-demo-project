@@ -66,9 +66,6 @@ export default function Header() {
           </NavLink>
         </div>
 
-        {/* {userNavigation}
-        {guestNavigation} */}
-
         {user.email ? userNavigation : guestNavigation}
       </nav>
     </header>
