@@ -131,4 +131,16 @@ router.post("/destroy-reply", isAuth(), async (req, res) => {
   }
 });
 
+router.post("/rate", isAuth(), async (req, res) => {
+  try {
+    const { phoneId, ratingValue } = req.body;
+    const phoneRating = await api.rate(phoneId, ratingValue);
+    res.status(200).json(phoneRating).end();
+  } catch (err) {
+    console.error(err.message);
+    const error = mapErrors(err);
+    res.status(400).json({ message: error });
+  }
+});
+
 module.exports = router;

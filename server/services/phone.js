@@ -128,6 +128,17 @@ async function destroyReply(phoneId, replyToRemoveId) {
   return phone.replies;
 }
 
+async function rate(phoneId, ratingValue) {
+  const phone = await Phone.findById(phoneId);
+
+  phone.rating.push(ratingValue);
+
+
+  await phone.save();
+
+  return phone.rating;
+}
+
 module.exports = {
   getAll,
   create,
@@ -139,4 +150,5 @@ module.exports = {
   destroyComment,
   replyComment,
   destroyReply,
+  rate,
 };

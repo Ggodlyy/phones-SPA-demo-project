@@ -18,7 +18,8 @@ const schema = new Schema({
   owner: { type: ObjectId, ref: "User" },
   likes: { type: [ObjectId], ref: "User", default: [] },
   comments: { type: [Object], default: [] },
-  replies: { type: [Object], default:[]}
+  replies: { type: [Object], default:[]},
+  rating: {type: [Number], default: []}
 });
 
 const Item = model("Item", schema);

@@ -26,3 +26,5 @@ export const replyToComment = (replyInfo) =>
 
 export const destroyReply = (replyInfo) =>
   request.post(`${baseUrl}/destroy-reply`, replyInfo);
+
+export const rate = (ratingValue) => request.post(`${baseUrl}/rate`, ratingValue)

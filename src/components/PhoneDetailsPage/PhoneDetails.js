@@ -8,7 +8,6 @@ import SendIcon from "@mui/icons-material/Send";
 import Comment from "../CommentCard/Comment";
 import { Delete } from "@mui/icons-material";
 
-
 export default function PhoneDetailsPage() {
   const navigate = useNavigate();
   const { phoneId } = useParams();
@@ -20,8 +19,12 @@ export default function PhoneDetailsPage() {
 
   useEffect(() => {
     phoneService.getOne(phoneId).then((res) => {
+      const avgRating =
+        res.rating.reduce((acc, curr) => (acc += curr), 0) / res.rating.length;
+
       setCommentState(false);
       setCurrentPhone(res);
+      setRating(avgRating);
 
       if (res._ownerId === user._id) {
         setIsOwner(true);
@@ -131,16 +134,20 @@ export default function PhoneDetailsPage() {
           {!isOwner && user.email ? userBtns : null}
 
           <div className="rating">
-          <Typography component="legend">Rating</Typography>
-          <Rating
-            name="simple-controlled"
-            size="large"
-            value={rating}
-            onChange={(event, newValue) => {
-              setRating(newValue);
-            }}
-          />
-        </div>
+            <Typography component="legend">Rating</Typography>
+            <Rating
+              name="simple-controlled"
+              size="large"
+              value={rating}
+              onChange={(event, ratingValue) => {
+                phoneService.rate({ phoneId, ratingValue }).then((res) => {
+                  const avgRating =
+                    res.reduce((acc, curr) => (acc += curr), 0) / res.length;
+                  setRating(avgRating);
+                });
+              }}
+            />
+          </div>
         </div>
         <div className="phone-img">
           <img className="phone-img" src={currentPhone.img} alt="" />
