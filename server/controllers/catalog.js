@@ -109,8 +109,20 @@ router.post("/destroy", isAuth(), async (req, res) => {
 
 router.post("/reply", isAuth(), async (req, res) => {
   try {
-    const { phoneId, commentId, reply } = req.body;
-    const comments = await api.replyComment(phoneId, commentId, reply);
+    const { phoneId, userId, reply } = req.body;
+    const replies = await api.replyComment(phoneId, userId, reply);
+    res.status(204).json(replies).end();
+  } catch (err) {
+    console.error(err.message);
+    const error = mapErrors(err);
+    res.status(400).json({ message: error });
+  }
+});
+
+router.post("/destroy-reply", isAuth(), async (req, res) => {
+  try {
+    const { phoneId, replyId } = req.body;
+    const comments = await api.destroyReply(phoneId, replyId);
     res.status(204).json(comments).end();
   } catch (err) {
     console.error(err.message);

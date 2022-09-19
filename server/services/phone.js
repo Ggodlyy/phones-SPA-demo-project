@@ -60,7 +60,6 @@ async function comment(id, userId, userComment) {
     date.getFullYear(),
   ];
 
-
   const fullDate = `${day}/${month + 1}/${year}`;
   // const fulldate = date.toLocaleDateString()
 
@@ -69,7 +68,7 @@ async function comment(id, userId, userComment) {
     owner: ownerInfo,
     createdAt: fullDate,
     commentText: userComment,
-    replies: []
+    replies: [],
   };
 
   phone.comments.push(commentInfo);
@@ -82,7 +81,7 @@ async function comment(id, userId, userComment) {
 async function destroyComment(phoneId, commentToRemoveId) {
   const phone = await Phone.findById(phoneId);
 
-  const i = phone.comments.findIndex(c => c.commentId === commentToRemoveId);
+  const i = phone.comments.findIndex((c) => c.commentId === commentToRemoveId);
 
   phone.comments.splice(i, 1);
 
@@ -91,17 +90,43 @@ async function destroyComment(phoneId, commentToRemoveId) {
   return phone.comments;
 }
 
-async function replyComment(phoneId, currentCommentId, reply) {
+async function replyComment(phoneId, userId, reply) {
   const phone = await Phone.findById(phoneId);
+  const user = await User.findById(userId);
 
-  const comment = phone.comments.find(c => c.commentId === currentCommentId);
+  const date = new Date();
+  const [month, day, year] = [
+    date.getMonth(),
+    date.getDate(),
+    date.getFullYear(),
+  ];
 
+  const fullDate = `${day}/${month + 1}/${year}`;
 
-  comment.replies.push(reply);
+  const replyInfo = {
+    replyId: uniqid(),
+    owner: user,
+    createdAt: fullDate,
+    replyText: reply,
+  };
+
+  phone.replies.push(replyInfo);
 
   await phone.save();
 
-  return comment.replies;
+  return phone.replies;
+}
+
+async function destroyReply(phoneId, commentToRemoveId) {
+  const phone = await Phone.findById(phoneId);
+
+  const i = phone.comments.findIndex((c) => c.commentId === commentToRemoveId);
+
+  phone.comments.splice(i, 1);
+
+  await phone.save();
+
+  return phone.comments;
 }
 
 module.exports = {
@@ -113,5 +138,6 @@ module.exports = {
   buy,
   comment,
   destroyComment,
-  replyComment
+  replyComment,
+  destroyReply,
 };

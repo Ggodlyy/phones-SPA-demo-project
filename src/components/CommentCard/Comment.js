@@ -1,7 +1,7 @@
 import "./Comment.scss";
 import { Avatar } from "@mui/material";
 import { orange } from "@mui/material/colors";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { IconButton, Button } from "@mui/material";
@@ -9,7 +9,7 @@ import { Delete } from "@mui/icons-material";
 import * as phoneService from "../../services/phoneService";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
-import { useEffect } from "react";
+import ReplyCard from "./ReplyCard";
 
 const Comment = ({
   commentText,
@@ -17,12 +17,15 @@ const Comment = ({
   commentId,
   owner,
   phoneId,
+  phone,
   setCommentState,
   replies,
 }) => {
   const { user } = useContext(AuthContext);
-  const commentOwner = Boolean(user._id === owner._id);
   const [replySection, setReplySection] = useState(false);
+  const [replyArticle, setReplyArticle] = useState(false);
+  const navigate = useNavigate();
+  const commentOwner = Boolean(user._id === owner._id);
 
   const removeCommentHandler = (e) => {
     e.preventDefault();
@@ -44,10 +47,33 @@ const Comment = ({
     replySection ? setReplySection(false) : setReplySection(true);
   };
 
+  const showReplyArticle = (e) => {
+    e.preventDefault();
+
+    replyArticle ? setReplyArticle(false) : setReplyArticle(true);
+  };
+
   const replyCommentHandler = (e) => {
     e.preventDefault();
 
-    const replyDiv = document.querySelector(".replyDiv");
+    if (!user.email) {
+      navigate("/login");
+      return null;
+    }
+
+    const textArea = e.target.previousElementSibling;
+    const reply = textArea.value;
+
+    if (reply.length === 0) {
+      window.alert("You can't send a blank reply");
+      return null;
+    }
+
+    let userId = user._id;
+    phoneService.replyToComment({phoneId, userId, reply })
+    textArea.value = "";
+
+    setCommentState(true);
   };
 
   const removeBtn = (
@@ -58,27 +84,6 @@ const Comment = ({
     </div>
   );
 
-  const replyDiv = (
-    <div className="replyInfo">
-      <div className="add-comment">
-        <textarea
-          className="comment-section"
-          name="comment"
-          placeholder="comment..."
-          id=""
-          cols="30"
-          rows="10"
-        ></textarea>
-        <Button
-          onClick={replyCommentHandler}
-          variant="contained"
-          endIcon={<SendIcon />}
-        >
-          replys
-        </Button>
-      </div>
-    </div>
-  );
 
   return (
     <>
@@ -116,21 +121,26 @@ const Comment = ({
           cols="30"
           rows="10"
         ></textarea>
-        <div className="replyBtnSend">
-          <Button
-            size="small"
-            className="reply-btn"
-            onClick={replyCommentHandler}
-            variant="contained"
-            endIcon={<SendIcon />}
-          >
-            Reply
-          </Button>
-        </div>
+
+        <Button
+          size="small"
+          className="reply-btn"
+          onClick={replyCommentHandler}
+          variant="contained"
+          endIcon={<SendIcon />}
+        >
+          Reply
+        </Button>
       </div>
 
       <article className="replies">
-        {replies?.length > 0 ? replyDiv : `Replies: ${replies?.length}`}
+        <Button onClick={showReplyArticle} variant="text" size="small">
+          Show Replies
+        </Button>
+
+        <div className={replyArticle ? "replyArticleOn" : "replyArticleOff"}>
+          {phone.replies?.length > 0 ? phone.replies.map(reply =>  <ReplyCard {...reply} phoneId={ phoneId} setCommentState={setCommentState} />) : `No replies!`}
+        </div>
       </article>
     </>
   );

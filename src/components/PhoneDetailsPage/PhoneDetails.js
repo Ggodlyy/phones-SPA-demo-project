@@ -155,6 +155,7 @@ export default function PhoneDetailsPage() {
                   key={commentObj.commentId}
                   {...commentObj}
                   phoneId={currentPhone._id}
+                  phone={currentPhone}
                   setCommentState={setCommentState}
                 />
               ))
