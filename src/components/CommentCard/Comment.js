@@ -70,7 +70,7 @@ const Comment = ({
     }
 
     let userId = user._id;
-    phoneService.replyToComment({phoneId, userId, reply })
+    phoneService.replyToComment({ phoneId, userId, reply });
     textArea.value = "";
 
     setCommentState(true);
@@ -83,7 +83,6 @@ const Comment = ({
       </IconButton>
     </div>
   );
-
 
   return (
     <>
@@ -139,7 +138,16 @@ const Comment = ({
         </Button>
 
         <div className={replyArticle ? "replyArticleOn" : "replyArticleOff"}>
-          {phone.replies?.length > 0 ? phone.replies.map(reply =>  <ReplyCard {...reply} phoneId={ phoneId} setCommentState={setCommentState} />) : `No replies!`}
+          {phone.replies?.length > 0
+            ? phone.replies.map((reply) => (
+                <ReplyCard
+                  key={reply.replyId}
+                  {...reply}
+                  phoneId={phoneId}
+                  setCommentState={setCommentState}
+                />
+              ))
+            : `No replies!`}
         </div>
       </article>
     </>

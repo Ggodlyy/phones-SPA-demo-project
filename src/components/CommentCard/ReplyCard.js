@@ -4,9 +4,16 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Delete } from "@mui/icons-material";
-import * as phoneService from '../../services/phoneService';
+import * as phoneService from "../../services/phoneService";
 
-const ReplyCard = ({ replyId, owner, createdAt, replyText, phoneId, setCommentState }) => {
+const ReplyCard = ({
+  replyId,
+  owner,
+  createdAt,
+  replyText,
+  phoneId,
+  setCommentState,
+}) => {
   const { user } = useContext(AuthContext);
   const replyOwner = Boolean(user._id === owner._id);
 

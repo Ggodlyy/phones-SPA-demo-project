@@ -68,7 +68,6 @@ async function comment(id, userId, userComment) {
     owner: ownerInfo,
     createdAt: fullDate,
     commentText: userComment,
-    replies: [],
   };
 
   phone.comments.push(commentInfo);
