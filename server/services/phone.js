@@ -60,7 +60,9 @@ async function comment(id, userId, userComment) {
     date.getFullYear(),
   ];
 
-  const fullDate = `${day}/${month}/${year}`;
+
+  const fullDate = `${day}/${month + 1}/${year}`;
+  // const fulldate = date.toLocaleDateString()
 
   const commentInfo = {
     commentId: uniqid(),

@@ -3,10 +3,11 @@ import "./PhoneDetails.scss";
 import * as phoneService from "../../services/phoneService";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { Button } from "@mui/material";
+import { Button, Typography, Rating } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import Comment from "../CommentCard/Comment";
 import { Delete } from "@mui/icons-material";
+
 
 export default function PhoneDetailsPage() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function PhoneDetailsPage() {
   const [isOwner, setIsOwner] = useState(false);
   const { user } = useContext(AuthContext);
   const [commentState, setCommentState] = useState(false);
-
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     phoneService.getOne(phoneId).then((res) => {
@@ -95,7 +96,11 @@ export default function PhoneDetailsPage() {
       <NavLink to={`/catalog/edit/${currentPhone._id}`} className="edit-btn">
         Edit
       </NavLink>
-      <Button onClick={deleteHandler} variant="contained" startIcon={<Delete />} >
+      <Button
+        onClick={deleteHandler}
+        variant="contained"
+        startIcon={<Delete />}
+      >
         Delete
       </Button>
     </div>
@@ -124,6 +129,18 @@ export default function PhoneDetailsPage() {
 
           {isOwner ? btns : null}
           {!isOwner && user.email ? userBtns : null}
+
+          <div className="rating">
+          <Typography component="legend">Rating</Typography>
+          <Rating
+            name="simple-controlled"
+            size="large"
+            value={rating}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+            }}
+          />
+        </div>
         </div>
         <div className="phone-img">
           <img className="phone-img" src={currentPhone.img} alt="" />
@@ -134,7 +151,12 @@ export default function PhoneDetailsPage() {
         <div className="all-comments">
           {currentPhone.comments?.length > 0
             ? currentPhone.comments?.map((commentObj) => (
-                <Comment key={commentObj.commentId} {...commentObj} phoneId={currentPhone._id} setCommentState={setCommentState} />
+                <Comment
+                  key={commentObj.commentId}
+                  {...commentObj}
+                  phoneId={currentPhone._id}
+                  setCommentState={setCommentState}
+                />
               ))
             : "No comments"}
         </div>
