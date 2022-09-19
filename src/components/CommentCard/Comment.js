@@ -19,7 +19,6 @@ const Comment = ({
   phoneId,
   phone,
   setCommentState,
-  replies,
 }) => {
   const { user } = useContext(AuthContext);
   const [replySection, setReplySection] = useState(false);
@@ -74,6 +73,7 @@ const Comment = ({
     textArea.value = "";
 
     setCommentState(true);
+    setReplyArticle(true);
   };
 
   const removeBtn = (
