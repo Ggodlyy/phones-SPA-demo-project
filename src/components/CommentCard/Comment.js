@@ -100,20 +100,25 @@ const Comment = ({
 
         {commentOwner && removeBtn}
 
-        <Button onClick={replySectionView} variant="text">
-          Reply
-        </Button>
+        <div className="replyBtnView">
+          <Button onClick={replySectionView} variant="text">
+            Reply
+          </Button>
+        </div>
+      </article>
 
-        <div className={replySection ? "toggleViewOn" : "toggleViewOff"}>
-          <textarea
-            className="reply-section"
-            name="reply"
-            placeholder="reply..."
-            id=""
-            cols="30"
-            rows="10"
-          ></textarea>
+      <div className={replySection ? "toggleViewOn" : "toggleViewOff"}>
+        <textarea
+          className="reply-section"
+          name="reply"
+          placeholder="reply..."
+          id=""
+          cols="30"
+          rows="10"
+        ></textarea>
+        <div className="replyBtnSend">
           <Button
+            size="small"
             className="reply-btn"
             onClick={replyCommentHandler}
             variant="contained"
@@ -122,7 +127,7 @@ const Comment = ({
             Reply
           </Button>
         </div>
-      </article>
+      </div>
 
       <article className="replies">
         {replies?.length > 0 ? replyDiv : `Replies: ${replies?.length}`}

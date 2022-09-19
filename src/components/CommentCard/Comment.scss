@@ -31,15 +31,24 @@
 }
 
 .reply-section {
-//   width: 467px;
-//   height: 68px;
+  width: 467px;
+  height: 68px;
 }
 
+
+
 .toggleViewOn {
-  display: block;
+  display: flex;
 }
 
 .toggleViewOff {
   display: none;
 }
+
+.replyBtnView {
+  margin-left: 5%;
+  align-self: center;
+}
+
+
 
