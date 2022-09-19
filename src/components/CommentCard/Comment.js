@@ -8,6 +8,8 @@ import { IconButton, Button } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import * as phoneService from "../../services/phoneService";
 import SendIcon from "@mui/icons-material/Send";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Comment = ({
   commentText,
@@ -20,6 +22,7 @@ const Comment = ({
 }) => {
   const { user } = useContext(AuthContext);
   const commentOwner = Boolean(user._id === owner._id);
+  const [replySection, setReplySection] = useState(false);
 
   const removeCommentHandler = (e) => {
     e.preventDefault();
@@ -35,8 +38,16 @@ const Comment = ({
     }
   };
 
+  const replySectionView = (e) => {
+    e.preventDefault();
+
+    replySection ? setReplySection(false) : setReplySection(true);
+  };
+
   const replyCommentHandler = (e) => {
     e.preventDefault();
+
+    const replyDiv = document.querySelector(".replyDiv");
   };
 
   const removeBtn = (
@@ -89,9 +100,11 @@ const Comment = ({
 
         {commentOwner && removeBtn}
 
-        <Button variant="text">Reply</Button>
+        <Button onClick={replySectionView} variant="text">
+          Reply
+        </Button>
 
-        <div className="replyDiv">
+        <div className={replySection ? "toggleViewOn" : "toggleViewOff"}>
           <textarea
             className="reply-section"
             name="reply"
