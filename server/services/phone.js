@@ -117,16 +117,16 @@ async function replyComment(phoneId, userId, reply) {
   return phone.replies;
 }
 
-async function destroyReply(phoneId, commentToRemoveId) {
+async function destroyReply(phoneId, replyToRemoveId) {
   const phone = await Phone.findById(phoneId);
 
-  const i = phone.comments.findIndex((c) => c.commentId === commentToRemoveId);
+  const i = phone.replies.findIndex((r) => r.replyId === replyToRemoveId);
 
-  phone.comments.splice(i, 1);
+  phone.replies.splice(i, 1);
 
   await phone.save();
 
-  return phone.comments;
+  return phone.replies;
 }
 
 module.exports = {

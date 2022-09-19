@@ -14,7 +14,7 @@ const ReplyCard = ({ replyId, owner, createdAt, replyText, phoneId, setCommentSt
     e.preventDefault();
 
     const confirmation = window.confirm(
-      "Are you sure you want to remove this comment?"
+      "Are you sure you want to remove this reply?"
     );
 
     if (confirmation) {
