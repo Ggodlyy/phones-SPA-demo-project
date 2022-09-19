@@ -72,6 +72,7 @@ const Comment = ({
     phoneService.replyToComment({ phoneId, userId, reply });
     textArea.value = "";
 
+    setReplySection(false);
     setCommentState(true);
     setReplyArticle(true);
   };
