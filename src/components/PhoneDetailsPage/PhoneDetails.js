@@ -8,7 +8,6 @@ import SendIcon from "@mui/icons-material/Send";
 import Comment from "../CommentCard/Comment";
 import { Delete } from "@mui/icons-material";
 import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
-import { positions } from "@mui/system";
 
 export default function PhoneDetailsPage() {
   const navigate = useNavigate();
@@ -145,11 +144,12 @@ export default function PhoneDetailsPage() {
               size="large"
               value={rating}
               onChange={(event, ratingValue) => {
-                phoneService.rate({ phoneId, ratingValue }).then((res) => {
+                isOwner ?  phoneService.rate({ phoneId, ratingValue }).then((res) => {
                   const avgRating =
                     res.reduce((acc, curr) => (acc += curr), 0) / res.length;
                   setRating(avgRating);
-                });
+                }) : navigate('/login');
+               
               }}
             />
           </div>
