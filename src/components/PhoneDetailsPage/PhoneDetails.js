@@ -144,12 +144,14 @@ export default function PhoneDetailsPage() {
               size="large"
               value={rating}
               onChange={(event, ratingValue) => {
-                isOwner ?  phoneService.rate({ phoneId, ratingValue }).then((res) => {
-                  const avgRating =
-                    res.reduce((acc, curr) => (acc += curr), 0) / res.length;
-                  setRating(avgRating);
-                }) : navigate('/login');
-               
+                isOwner
+                  ? phoneService.rate({ phoneId, ratingValue }).then((res) => {
+                      const avgRating =
+                        res.reduce((acc, curr) => (acc += curr), 0) /
+                        res.length;
+                      setRating(avgRating);
+                    })
+                  : navigate("/login");
               }}
             />
           </div>

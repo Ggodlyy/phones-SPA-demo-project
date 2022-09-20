@@ -9,6 +9,8 @@ import { isAuth } from "../../hoc/isAuth";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
+// import { orange } from "@mui/material/colors";
+// import { Avatar, Button } from "@mui/material";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
@@ -26,9 +28,10 @@ const ProfilePage = () => {
     });
   }, [user._id]);
 
-  const showBoughtPhones = () => {
-
-  }
+  // const submitAvatar = (e) => {
+  //   e.preventDefault();
+  //   console.log("clicked");
+  // };
 
   const phonesDisplay = (
     <div className="phones">
@@ -53,15 +56,28 @@ const ProfilePage = () => {
   return (
     <div className="profile-page">
       <h1>Hello {user.username}</h1>
+      {/* <div className="avatar">
+        <form onSubmit={submitAvatar} className="avatar-form">
+          <Avatar style={{height: '150px', width: '150px'}} sx={{ bgcolor: orange[500] }}>
+            {user.username[0].toUpperCase()}
+          </Avatar>
+          <input className="file-input" type="file" />
+          <Button variant="contained" size="small">Change Avatar</Button>
+        </form>
+      </div> */}
       <h1 className="profile-titles ">My phones</h1>
       <section className="my-phones">
         {myPhones?.length > 0 ? phonesDisplay : <h4>No phones</h4>}
       </section>
 
       <h1 className="profile-titles">Bought Phones</h1>
-      <IconButton onClick={showBoughtPhones} aria-label="cart">
-        <Badge style={{ color: "white" }} badgeContent={boughtPhones?.length} color="secondary">
-          <ShoppingCartIcon style={{fontSize: '50px'}} />
+      <IconButton aria-label="cart">
+        <Badge
+          style={{ color: "white" }}
+          badgeContent={boughtPhones?.length}
+          color="secondary"
+        >
+          <ShoppingCartIcon style={{ fontSize: "50px" }} />
         </Badge>
       </IconButton>
       <div className="bought-phones-display">

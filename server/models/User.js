@@ -23,7 +23,7 @@ const userSchema = new Schema({
     required: true,
     minlength: [3, "password must be at least 3 charaters long"],
   },
-  avatar: { data: Buffer, contentType: String },
+  avatar: { type: Buffer },
   boughtPhones: { type: [Object], ref: "Phone", default: [] },
 });
 

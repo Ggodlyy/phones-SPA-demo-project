@@ -81,11 +81,22 @@ function verifySession(token) {
     };
 }
 
+async function uploadAvatar(userId, img) {
+    const user = User.findOne({ _id: userId });
+
+    user.avatar = img
+
+    user.save();
+
+    return user;
+}
+
 module.exports = {
     register,
     login,
     logout,
     getUser,
     getProfile,
-    verifySession
+    verifySession,
+    uploadAvatar
 };
