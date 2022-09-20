@@ -77,7 +77,6 @@ header {
   }
 }
 
-
 // .logo::before {
 //   content: "Home";
 //   position: absolute;
@@ -87,3 +86,30 @@ header {
 //   color: white;
 //   opacity: 1;
 // }
+
+@media only screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .nav-ul {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-right: 0;
+  }
+
+  .nav-ul li a {
+    font-size: 24px;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-ul li {
+    margin-right: 0;
+  }
+}
