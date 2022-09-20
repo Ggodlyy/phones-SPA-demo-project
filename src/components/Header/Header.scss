@@ -88,6 +88,11 @@ header {
 // }
 
 @media only screen and (max-width: 600px) {
+
+  header  {
+    position: relative;
+  }
+  
   .navbar {
     flex-direction: column;
     justify-content: center;
