@@ -7,6 +7,8 @@ import { Button, Typography, Rating } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import Comment from "../CommentCard/Comment";
 import { Delete } from "@mui/icons-material";
+import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
+import { positions } from "@mui/system";
 
 export default function PhoneDetailsPage() {
   const navigate = useNavigate();
@@ -123,7 +125,10 @@ export default function PhoneDetailsPage() {
         <div className="phone-info">
           <h1>Brand: {currentPhone.brand}</h1>
           <h2>Model: {currentPhone.model}</h2>
-          <p>Price: {currentPhone.price}</p>
+          <p>
+            Price: {currentPhone.price}{" "}
+            <CurrencyPoundIcon style={{ position: "absolute" }} />
+          </p>
           <div className="container">
             <p className="line-clamp">
               Description: {currentPhone.description}
