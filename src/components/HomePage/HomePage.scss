@@ -1,8 +1,15 @@
 .home-page {
-    width: 1920px;
-    height: 1080px;
-    background-image: url(../../../public/home-page-background.png);
-    background-repeat: no-repeat;
-    background-position-x: 20%;
-    background-position-y: 10%;
+  width: 1920px;
+  height: 1080px;
+  background-image: url(../../../public/home-page-background.png);
+  background-repeat: no-repeat;
+  background-position-x: 20%;
+  background-position-y: 10%;
+}
+
+@media only screen and (max-width: 600px) {
+  .home-page {
+    background-position-x: 0%;
+    background-position-y: 0%;
+  }
 }
