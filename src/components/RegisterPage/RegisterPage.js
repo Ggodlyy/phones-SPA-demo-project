@@ -13,7 +13,7 @@ export default function RegisterPage() {
   } = useForm();
 
   const registerHandler = (data) => {
-    const {username, email, password, repass, avatar } = data;
+    const { username, email, password, repass, avatar } = data;
 
     if (password !== repass) {
       return window.alert("passwords don't match!");
@@ -54,7 +54,10 @@ export default function RegisterPage() {
           <input
             {...register("username", {
               required: "Username is required",
-              minLength: {value: 2, message: 'Username must be at least 2 characters long'}
+              minLength: {
+                value: 2,
+                message: "Username must be at least 2 characters long",
+              },
             })}
             type="text"
             placeholder="Enter Username"
@@ -154,11 +157,6 @@ export default function RegisterPage() {
                 : ""
             }
           />
-
-          <label htmlFor="avatar">
-            <b>Avatar Image</b>
-          </label>
-          <input type="file" name="avatar" id="avatar" />
 
           <button className="registerbtn">Register</button>
 
