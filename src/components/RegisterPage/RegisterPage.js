@@ -46,7 +46,6 @@ export default function RegisterPage() {
       });
   };
 
-  const usernameWatch = watch("username");
   const emaiWatch = watch("email");
   const passwordWatch = watch("password");
   const repassWatch = watch("repass");

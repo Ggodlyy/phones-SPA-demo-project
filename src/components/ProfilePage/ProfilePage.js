@@ -9,6 +9,7 @@ import { isAuth } from "../../hoc/isAuth";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
+import { useNavigate } from "react-router-dom";
 // import { orange } from "@mui/material/colors";
 // import { Avatar, Button } from "@mui/material";
 
@@ -16,6 +17,7 @@ const ProfilePage = () => {
   const { user } = useContext(AuthContext);
   const [myPhones, setMyPhones] = useState();
   const [boughtPhones, setBoughtPhones] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     phoneService.getAll().then((res) => {
@@ -32,6 +34,12 @@ const ProfilePage = () => {
   //   e.preventDefault();
   //   console.log("clicked");
   // };
+
+  const transactionHandler = (e) => {
+    e.preventDefault();
+
+    navigate('/transactions');
+  }
 
   const phonesDisplay = (
     <div className="phones">
@@ -71,7 +79,7 @@ const ProfilePage = () => {
       </section>
 
       <h1 className="profile-titles">Bought Phones</h1>
-      <IconButton aria-label="cart">
+      <IconButton onClick={transactionHandler} aria-label="cart">
         <Badge
           style={{ color: "white" }}
           badgeContent={boughtPhones?.length}

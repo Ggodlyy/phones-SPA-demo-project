@@ -29,3 +29,6 @@ export const getProfile = (userId) => {
 export const getUser = (username) => {
   return request.get(`${baseUrl}/profiles/${username}`);
 };
+
+export const transact = (userId) =>
+  request.put(`${baseUrl}/transaction`, { userId });

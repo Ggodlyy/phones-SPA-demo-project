@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { isGuest, isAuth } = require("../middlewares/guards");
-const { register, login, logout, getProfile, getUser, uploadAvatar } = require("../services/users");
+const { register, login, logout, getProfile, getUser, uploadAvatar, transactApi } = require("../services/users");
 const mapErrors = require("../utils/mapper");
 
 router.post("/register", isGuest(), async (req, res) => {
@@ -70,6 +70,18 @@ router.post("/avatar", async (req, res) => {
   try {
     const {img, userId} = req.body;
     const result = await uploadAvatar(userId, img);
+    res.json(result);
+  } catch (err) {
+    console.error(err.message);
+    const error = mapErrors(err);
+    res.status(400).json({ message: error });
+  }
+});
+
+router.put("/transaction", async (req, res) => {
+  try {
+    const {userId} = req.body;
+    const result = await transactApi(userId);
     res.json(result);
   } catch (err) {
     console.error(err.message);
