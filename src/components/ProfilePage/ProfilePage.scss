@@ -1,6 +1,8 @@
 @mixin phonesDisplay {
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: 5%;
 }
 
 .profile-page {
