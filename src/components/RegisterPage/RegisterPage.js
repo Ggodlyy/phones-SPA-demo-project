@@ -30,7 +30,7 @@ export default function RegisterPage() {
       });
   };
 
-  // const usernameWatch = watch('username');
+  const usernameWatch = watch("username");
   const emaiWatch = watch("email");
   const passwordWatch = watch("password");
   const repassWatch = watch("repass");
@@ -63,6 +63,13 @@ export default function RegisterPage() {
             placeholder="Enter Username"
             name="username"
             id="username"
+            className={
+              (Boolean(usernameWatch) === false
+                ? ""
+                : "input-error") || errors.username?.message
+                ? "input-error"
+                : ""
+            }
           />
 
           <label htmlFor="email">
