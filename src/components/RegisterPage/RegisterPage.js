@@ -2,9 +2,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import * as authService from "../../services/authService";
 import { useForm } from "react-hook-form";
 import "./RegisterPage.scss";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+  const { userLogin } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -25,7 +28,20 @@ export default function RegisterPage() {
         if (authData.message) {
           window.alert(authData.message);
         } else {
-          navigate("/login");
+          authService
+            .login(email, password)
+            .then((authData) => {
+              if (authData.message) {
+                window.alert(authData.message);
+              } else {
+                console.log(authData);
+                userLogin(authData);
+                navigate("/profile");
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       });
   };
@@ -63,13 +79,7 @@ export default function RegisterPage() {
             placeholder="Enter Username"
             name="username"
             id="username"
-            className={
-              (Boolean(usernameWatch) === false
-                ? ""
-                : "input-error") || errors.username?.message
-                ? "input-error"
-                : ""
-            }
+            className={errors.username?.message ? "input-error" : ""}
           />
 
           <label htmlFor="email">
