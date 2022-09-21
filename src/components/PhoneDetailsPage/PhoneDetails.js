@@ -12,10 +12,10 @@ import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
 export default function PhoneDetailsPage() {
   const navigate = useNavigate();
   const { phoneId } = useParams();
-  const [currentPhone, setCurrentPhone] = useState(null);
-  const [isOwner, setIsOwner] = useState(false);
   const { user } = useContext(AuthContext);
+  const [currentPhone, setCurrentPhone] = useState(null);
   const [commentState, setCommentState] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
