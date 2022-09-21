@@ -1,7 +1,9 @@
 .phone-catalog {
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin-bottom: 5%;
+  margin-left: 5%;
 }
 
 .no-phones {
