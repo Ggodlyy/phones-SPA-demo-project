@@ -56,7 +56,7 @@ export default function CatalogPage() {
       <section className="filter-section">
         <div className="filter">
           <h1>Filter by:</h1>
-          <FormControl size="small" fullWidth>
+          <FormControl size="small" fullWidth style={{width: '200px'}}>
             <InputLabel className="label" id="demo-simple-select-label">
               Brand
             </InputLabel>

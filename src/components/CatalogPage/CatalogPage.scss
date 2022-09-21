@@ -3,7 +3,7 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   margin-bottom: 5%;
-  margin-left: 5%;
+  margin-left: 7%;
 }
 
 .no-phones {
@@ -12,9 +12,7 @@
 
 
 .filter {
-  margin-left: 35%;
   text-align: center;
-  max-width: 20%;
   color: white;
 }
 
@@ -26,6 +24,19 @@
   color: black;
   background-color: white;
 }
+
+.filter-section {
+  display: flex;
+  justify-content: center;
+}
+
+
+@media only screen and (max-width: 600px) { 
+  .phone-catalog {
+    justify-content: center;
+  }
+}
+
 
 
 
