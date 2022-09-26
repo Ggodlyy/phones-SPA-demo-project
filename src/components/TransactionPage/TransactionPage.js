@@ -40,13 +40,13 @@ const TransactionPage = () => {
   };
 
   const boughtPhoneInfoView = (
-    <article>
+    <article className="bough-phone-article">
       <ul className="bought-phones-ul">
         {boughtPhones?.length > 0
-          ? boughtPhones.map((p) => <li key={p._id}>{p.brand}</li>)
+          ? boughtPhones.map((p) => <li key={p._id}>{p.brand} {p.model}</li>)
           : "No phones"}
       </ul>
-      <h3>{priceSum !== 0 ? `Final price: ${priceSum}` : null}</h3>
+      <h4>{priceSum !== 0 ? `Final price: ${priceSum}` : null}</h4>
     </article>
   );
 

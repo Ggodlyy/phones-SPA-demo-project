@@ -9,12 +9,17 @@ import RegisterPage from "./components/RegisterPage/RegisterPage";
 import Logout from "./components/Logout";
 import AddPhone from "./components/AddPhonePage/AddPhone";
 import CatalogPage from "./components/CatalogPage/CatalogPage";
-import PhoneDetailsPage from "./components/PhoneDetailsPage/PhoneDetails";
+// import PhoneDetailsPage from "./components/PhoneDetailsPage/PhoneDetails";
 import EditPage from "./components/EditPage/EditPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Profiles from "./components/ProfilePage/Profiles";
 import TransactionPage from "./components/TransactionPage/TransactionPage";
+import { lazy, Suspense } from "react";
+
+const PhoneDetailsPage = lazy(() =>
+  import("./components/PhoneDetailsPage/PhoneDetails")
+);
 
 function App() {
   return (
@@ -23,23 +28,25 @@ function App() {
         <Header />
         <PhoneProvider>
           <main className="main-content">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route path="/addPhone" element={<AddPhone />} />
-              <Route path="/catalog" element={<CatalogPage />} />
-              <Route
-                path="/catalog/details/:phoneId"
-                element={<PhoneDetailsPage />}
-              />
-              <Route path="/catalog/edit/:phoneId" element={<EditPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/profiles/:username" element={<Profiles />} />
-              <Route path="/transactions" element={<TransactionPage />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/logout" element={<Logout />} />
+                <Route path="/addPhone" element={<AddPhone />} />
+                <Route path="/catalog" element={<CatalogPage />} />
+                <Route
+                  path="/catalog/details/:phoneId"
+                  element={<PhoneDetailsPage />}
+                />
+                <Route path="/catalog/edit/:phoneId" element={<EditPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profiles/:username" element={<Profiles />} />
+                <Route path="/transactions" element={<TransactionPage />} />
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+            </Suspense>
           </main>
         </PhoneProvider>
       </div>
