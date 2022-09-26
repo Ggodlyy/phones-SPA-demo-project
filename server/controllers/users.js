@@ -66,17 +66,6 @@ router.post("/profile", async (req, res) => {
   }
 });
 
-router.post("/avatar", async (req, res) => {
-  try {
-    const {img, userId} = req.body;
-    const result = await uploadAvatar(userId, img);
-    res.json(result);
-  } catch (err) {
-    console.error(err.message);
-    const error = mapErrors(err);
-    res.status(400).json({ message: error });
-  }
-});
 
 router.put("/transaction", async (req, res) => {
   try {

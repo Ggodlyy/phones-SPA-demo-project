@@ -82,15 +82,6 @@ function verifySession(token) {
   };
 }
 
-async function uploadAvatar(userId, img) {
-  const user = User.findOne({ _id: userId });
-
-  user.avatar = img;
-
-  user.save();
-
-  return user;
-}
 
 async function transactApi(userId, img) {
   const user = await User.findOne({ _id: userId });
@@ -111,6 +102,5 @@ module.exports = {
   getUser,
   getProfile,
   verifySession,
-  uploadAvatar,
   transactApi,
 };
